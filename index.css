@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dextro Assistant</title>
+</head>
+<body>
+  <h2>Ask Dextro</h2>
+  <input id="query" />
+  <button onclick="ask()">Ask</button>
+  <div id="response"></div>
+  <script>
+    async function ask() {
+      const query = document.getElementById('query').value;
+      const res = await fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json();
+      document.getElementById('response').innerText = data.answer;
+    }
+  </script>
+</body>
+</html>
